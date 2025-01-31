@@ -5,12 +5,6 @@ import { usersServices } from "@/services/users-create.service";
 import { prisma } from "@/database/prisma";
 
 export class UsersController{
-    async index(req: Request, res: Response){
-        const users = await prisma.user.findMany()
-        
-        res.json(users)
-    }
-
     async create(req: Request, res: Response){
         const bodySchema = z.object({
             name: z.string().trim(),
