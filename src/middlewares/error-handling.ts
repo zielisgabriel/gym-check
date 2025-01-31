@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { AppError } from '@/utils/AppError'
 import { ZodError } from 'zod'
+import { ENV } from '@/env'
 
 export function errorHandling(error: any, req: Request, res: Response, _: NextFunction){
     if(error instanceof AppError){
@@ -13,6 +14,10 @@ export function errorHandling(error: any, req: Request, res: Response, _: NextFu
         return
     }
 
-    res.status(500).json({ message: error.message })
+    if(ENV.NODE_DEV !== 'dev'){
+        console.log(error)
+    }
+
+    res.status(500).json({ message: "Erro interno" })
     return
 }
