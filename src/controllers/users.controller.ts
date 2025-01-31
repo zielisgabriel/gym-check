@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import z, { string } from "zod";
-import { AppError } from "@/utils/AppError";
+import z from "zod";
 import { UserCreateServices } from "@/services/users-create.service";
-import { prisma } from "@/database/prisma";
 import { PrismaUsersRepository } from "@/repositories/prisma-users-repository";
 
 export class UsersController{
