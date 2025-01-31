@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import z, { string } from "zod";
 import { AppError } from "@/utils/AppError";
-import { usersServices } from "@/services/users-create.service";
+import { UserCreateServices } from "@/services/users-create.service";
 import { prisma } from "@/database/prisma";
+import { PrismaUsersRepository } from "@/repositories/prisma-users-repository";
 
 export class UsersController{
     async create(req: Request, res: Response){
@@ -14,7 +15,10 @@ export class UsersController{
 
         const { name, email, password } = bodySchema.parse(req.body)
         
-        await usersServices({ name, email, password, })
+        const prismaUsersRepository = new PrismaUsersRepository()
+        const userCreateServices = new UserCreateServices(prismaUsersRepository)
+
+        await userCreateServices.execute({ name, email, password, })
 
         res.status(201).json()
     }
