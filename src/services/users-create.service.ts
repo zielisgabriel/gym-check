@@ -1,4 +1,5 @@
 import { prisma } from "@/database/prisma";
+import { PrismaUsersRepository } from "@/repositories/prisma-users-repository";
 import { hash } from 'bcryptjs'
 
 interface UsersServicesParams {
@@ -20,12 +21,11 @@ export async function usersServices({ name, email, password, }: UsersServicesPar
             throw new Error('Já existe um usuário com esse email e/ou senha')
         }
         
+        const prismaUsersRepository = new PrismaUsersRepository()
 
-        await prisma.user.create({
-            data: {
-                name,
-                email,
-                passwordHash: hashPassword,
-            },
+        await prismaUsersRepository.create({
+            name,
+            email,
+            passwordHash: password
         })
 }
