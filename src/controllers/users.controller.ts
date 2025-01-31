@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import z from "zod";
+import z, { string } from "zod";
 import { AppError } from "@/utils/AppError";
 import { usersServices } from "@/services/users-create.service";
 import { prisma } from "@/database/prisma";
@@ -20,11 +20,7 @@ export class UsersController{
 
         const { name, email, password } = bodySchema.parse(req.body)
         
-        try {
-            usersServices({ name, email, password, })
-        } catch (err) {
-            throw new AppError(err as string, 409)
-        }
+        await usersServices({ name, email, password, })
 
         res.status(201).json()
     }
