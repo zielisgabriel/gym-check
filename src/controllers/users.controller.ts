@@ -13,8 +13,8 @@ export class UsersController{
 
         const { name, email, password } = bodySchema.parse(req.body)
         
-        const prismaUsersRepository = new PrismaUsersRepository()
-        const userCreateServices = new UserCreateServices(prismaUsersRepository)
+        const usersRepository = new PrismaUsersRepository()
+        const userCreateServices = new UserCreateServices(usersRepository)
 
         await userCreateServices.execute({ name, email, password, })
 
