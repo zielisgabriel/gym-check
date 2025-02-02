@@ -2,6 +2,7 @@ import { UsersRepository } from "@/repositories/users-repository";
 import { AppError } from "@/utils/AppError";
 import { User } from "@prisma/client";
 import { hash } from 'bcryptjs'
+import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
 
 interface UsersServicesParams{
     name: string,
@@ -22,7 +23,7 @@ export class UserCreateServices{
         const userWithSameEmail = await this.usersRepository.findByEmail(email)
         
         if(userWithSameEmail){
-            throw new AppError('Já existe um usuário com esse email e/ou senha', 409)
+            throw new UserAlreadyExistsError()
         }
         
         // const prismaUsersRepository = new PrismaUsersRepository()

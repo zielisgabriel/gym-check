@@ -3,7 +3,7 @@ version: '3.7'
 services:
   gympass-pg:
     image: bitnami/postgresql:latest
-    container_name: postgres
+    container_name: gymcheck-pg
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
