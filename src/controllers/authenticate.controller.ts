@@ -1,5 +1,6 @@
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
 import { AuthenticateService } from "@/services/authenticate.service";
+import { makeAuthenticateService } from "@/services/factories/make-authenticate-service";
 import { Request, Response } from "express";
 import z from "zod";
 
@@ -12,8 +13,7 @@ export class AuthenticateController{
 
         const { email, password } = bodySchema.parse(req.body)
 
-        const prismaUsersRepository = new PrismaUsersRepository()
-        const authenticateService = new AuthenticateService(prismaUsersRepository)
+        const authenticateService = makeAuthenticateService()
 
         await authenticateService.execute({ email, password })
 

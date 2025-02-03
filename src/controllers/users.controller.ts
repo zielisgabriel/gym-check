@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import z from "zod";
 import { UserCreateServices } from "@/services/users-create.service";
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
+import { makeRegisterService } from "@/services/factories/make-user-create-service";
 
 export class UsersController{
     async create(req: Request, res: Response){
@@ -13,8 +14,7 @@ export class UsersController{
 
         const { name, email, password } = bodySchema.parse(req.body)
         
-        const usersRepository = new PrismaUsersRepository()
-        const userCreateServices = new UserCreateServices(usersRepository)
+        const userCreateServices = makeRegisterService()
 
         await userCreateServices.execute({ name, email, password, })
 
