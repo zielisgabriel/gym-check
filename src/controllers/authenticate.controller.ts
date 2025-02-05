@@ -1,6 +1,6 @@
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
-import { AuthenticateService } from "@/services/authenticate.service";
-import { makeAuthenticateService } from "@/services/factories/make-authenticate-service";
+import { AuthenticateService } from "@/use-cases/authenticate-use-case";
+import { makeAuthenticateService } from "@/use-cases/factories/make-authenticate-service";
 import { Request, Response } from "express";
 import z from "zod";
 

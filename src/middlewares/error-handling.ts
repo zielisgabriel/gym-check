@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 import { AppError } from '@/utils/AppError'
 import { ZodError } from 'zod'
 import { ENV } from '@/env'
-import { UserAlreadyExistsError } from '@/services/errors/user-already-exists-error'
-import { InvalidCredentialsError } from '@/services/errors/invalid-credentials-error'
+import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
+import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
 
 export function errorHandling(error: any, req: Request, res: Response, _: NextFunction){
     if(error instanceof AppError){
