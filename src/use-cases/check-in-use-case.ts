@@ -1,4 +1,4 @@
-import { CheckIn, User } from "@prisma/client";
+import { CheckIn } from "@prisma/client";
 import { CheckInsRepository } from "@/repositories/check-ins-repository";
 
 
@@ -17,6 +17,8 @@ export class CheckInService{
     constructor(private checkInsRepository: CheckInsRepository){}
 
     async execute({ userId, gymId }: CheckInServiceRequest): Promise<CheckInServiceResponse>{
+        await this.checkInsRepository.findCheckInOnSameDate({ userId, gymId })
+
         const checkIn = await this.checkInsRepository.create({
             userId,
             gymId,
