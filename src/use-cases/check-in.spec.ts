@@ -37,7 +37,7 @@ describe("Check-in services", () => {
                 gymId: 'gym-01',
                 userId: 'user-01',
                 userLatitude: 0,
-                userLontitude: 0,
+                userLongitude: 0,
             })
 
             expect(checkIn.id).toEqual(expect.any(String))
@@ -59,14 +59,14 @@ describe("Check-in services", () => {
                 gymId: 'gym-01',
                 userId: 'user-02',
                 userLatitude: 0,
-                userLontitude: 0,
+                userLongitude: 0,
             })
 
             await expect(() => sut.execute({
                     gymId: 'gym-01',
                     userId: 'user-02',
                     userLatitude: 0,
-                    userLontitude: 0,
+                    userLongitude: 0,
                 })
             ).rejects.toBeInstanceOf(Error)
         })
@@ -87,7 +87,7 @@ describe("Check-in services", () => {
                 gymId: 'gym-01',
                 userId: 'user-02',
                 userLatitude: 0,
-                userLontitude: 0,
+                userLongitude: 0,
             })
 
             vi.setSystemTime(new Date(2025, 1, 2, 7, 0, 0))
@@ -96,10 +96,28 @@ describe("Check-in services", () => {
                 gymId: 'gym-01',
                 userId: 'user-02',
                 userLatitude: 0,
-                userLontitude: 0,
+                userLongitude: 0,
             })
 
             expect(checkIn).toBeTruthy()
+        })
+
+        it('should not be able to check in distant gym', async () => {
+            await inMemoryGymsRepository.create({
+                id: "gym-02",
+                title: "Gym Power",
+                description: "Academia",
+                latitude: -3.7599854,
+                longitude: -38.6484074,
+                phone: "",
+            })
+
+            await expect(() => sut.execute({
+                gymId: 'gym-02',
+                userId: 'user-02',
+                userLatitude: -3.7220349,
+                userLongitude: -38.5086167,
+            })).rejects.toBeInstanceOf(Error)
         })
     }
 })

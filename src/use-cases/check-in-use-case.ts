@@ -2,6 +2,7 @@ import { CheckIn } from "@prisma/client";
 import { CheckInsRepository } from "@/repositories/check-ins-repository";
 import dayjs from "dayjs";
 import { GymsRepository } from "@/repositories/gyms-repository";
+import { getDistaceBetweenCoordinates } from "@/utils/get-distace-between-coordinates";
 
 
 // interface de entrada dos dados
@@ -9,7 +10,7 @@ interface CheckInServiceRequest{
     userId: string,
     gymId: string,
     userLatitude: number,
-    userLontitude: number,
+    userLongitude: number,
 }
 
 // interface de saída dos dados
@@ -23,10 +24,25 @@ export class CheckInService{
         private gymsRepository: GymsRepository,
     ){}
 
-    async execute({ userId, gymId }: CheckInServiceRequest): Promise<CheckInServiceResponse>{
+    async execute({ userId, gymId, userLatitude, userLongitude }: CheckInServiceRequest): Promise<CheckInServiceResponse>{
         const gymFound = await this.gymsRepository.findById(gymId)
 
-        // cálculo da latitude e lontitude
+        const distanceCalculated = getDistaceBetweenCoordinates(
+            {
+                latitude: userLatitude,
+                longitude: userLongitude,
+            },
+            {
+                latitude: Number(gymFound?.latitude),
+                longitude: Number(gymFound?.longitude),
+            },
+        )
+
+        console.log(distanceCalculated)
+
+        if(distanceCalculated >= 0.1){
+            throw new Error()
+        }
 
         const userWhoCheckIn = await this.checkInsRepository.findCheckInOnSameDate(userId, new Date())
 
