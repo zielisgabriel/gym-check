@@ -3,6 +3,8 @@ import { CheckInsRepository } from "@/repositories/check-ins-repository";
 import dayjs from "dayjs";
 import { GymsRepository } from "@/repositories/gyms-repository";
 import { getDistaceBetweenCoordinates } from "@/utils/get-distace-between-coordinates";
+import { MaxDistaceError } from "./errors/max-distance-error";
+import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins-error";
 
 
 // interface de entrada dos dados
@@ -39,13 +41,13 @@ export class CheckInService{
         )
 
         if(distanceCalculated >= 0.1){
-            throw new Error()
+            throw new MaxDistaceError()
         }
 
         const userWhoCheckIn = await this.checkInsRepository.findCheckInOnSameDate(userId, new Date())
 
         if(userWhoCheckIn){
-            throw new Error()
+            throw new MaxNumberOfCheckInsError()
         }
 
         const checkIn = await this.checkInsRepository.create({
