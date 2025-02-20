@@ -38,8 +38,6 @@ export class CheckInService{
             },
         )
 
-        console.log(distanceCalculated)
-
         if(distanceCalculated >= 0.1){
             throw new Error()
         }
