@@ -1,6 +1,5 @@
 import { CheckIn } from "@prisma/client";
 import { CheckInsRepository } from "@/repositories/check-ins-repository";
-import dayjs from "dayjs";
 import { GymsRepository } from "@/repositories/gyms-repository";
 import { getDistaceBetweenCoordinates } from "@/utils/get-distace-between-coordinates";
 import { MaxDistaceError } from "./errors/max-distance-error";
