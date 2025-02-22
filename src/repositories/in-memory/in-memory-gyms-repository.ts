@@ -9,7 +9,7 @@ import { MaxDistaceError } from "@/use-cases/errors/max-distance-error";
 export class InMemoryGymsRepository implements GymsRepository{
     public database: Gym[] = []
 
-    async findById(id: string): Promise<Gym | null> {
+    async findById(id: string): Promise<Gym> {
         const gym = this.database.find((item) => item.id === id)
 
         if(!gym){

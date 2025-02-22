@@ -19,6 +19,16 @@ export class InMemoryCheckInsRepository implements CheckInsRepository{
         return checkInFound
     }
 
+    async findById(checkInId: string): Promise<CheckIn | null> {
+        const checkIn = this.database.find((item) => item.id === checkInId)
+
+        if(!checkIn){
+            return null
+        }
+
+        return checkIn
+    }
+
     async findManyByUserId(userId: string, page: number): Promise<CheckIn[]> {
         const checkIns = this.database.filter((item) => item.userId === userId)
 
