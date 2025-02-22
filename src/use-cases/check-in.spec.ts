@@ -3,11 +3,11 @@ import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-c
 import { CheckInService } from "./check-in-use-case";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository";
 
-let inMemoryCheckInsRepository: InMemoryCheckInsRepository
-let inMemoryGymsRepository: InMemoryGymsRepository
-let sut: CheckInService
-
 describe("Check-in services", () => {
+    let inMemoryCheckInsRepository: InMemoryCheckInsRepository
+    let inMemoryGymsRepository: InMemoryGymsRepository
+    let sut: CheckInService
+
     {
         beforeEach(() => {
             vi.useFakeTimers()
