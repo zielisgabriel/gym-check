@@ -4,6 +4,10 @@ import { randomUUID } from "node:crypto";
 import dayjs from "dayjs";
 
 export class InMemoryCheckInsRepository implements CheckInsRepository{
+    save(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
+        throw new Error("Method not implemented.");
+    }
+
     public database: CheckIn[] = []
 
     async findCheckInOnSameDate(userId: string, date: Date) {
@@ -38,7 +42,7 @@ export class InMemoryCheckInsRepository implements CheckInsRepository{
     async showCheckinsTotalNumber(userId: string){
         const checkIns = this.database.filter((item) => item.userId === userId)
         
-        return checkIns
+        return checkIns.length
     }
 
     async create(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
