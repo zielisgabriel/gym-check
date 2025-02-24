@@ -4,7 +4,6 @@ import { ResourceNotExistsError } from "@/use-cases/errors/resource-not-exists-e
 import { randomUUID } from "crypto";
 import { getDistaceBetweenCoordinates } from "@/utils/get-distace-between-coordinates";
 import { Decimal } from "@prisma/client/runtime/library";
-import { MaxDistaceError } from "@/use-cases/errors/max-distance-error";
 
 export class InMemoryGymsRepository implements GymsRepository{
     public database: Gym[] = []

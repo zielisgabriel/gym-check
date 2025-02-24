@@ -64,15 +64,4 @@ export class PrismaCheckInsRepository implements CheckInsRepository{
 
         return findCheckinOnSameDate
     }
-
-    async save(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
-        const checkIn = await prisma.checkIn.update({
-            where: {
-                id: data.id,
-            },
-            data,
-        })
-
-        return checkIn
-    }
 }

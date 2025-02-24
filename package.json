@@ -3,13 +3,17 @@
     "@types/bcrypt": "5.0.2",
     "@types/bcryptjs": "2.4.6",
     "@types/express": "5.0.0",
+    "@types/jsonwebtoken": "9.0.9",
     "@types/node": "22.12.0",
-    "@vitest/ui": "3.0.4",
+    "@vitest/coverage-v8": "3.0.6",
+    "@vitest/ui": "3.0.6",
+    "npm-run-all": "4.1.5",
     "tsup": "8.3.6",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.0.4"
+    "vitest": "3.0.6",
+    "vitest-tsconfig-paths": "3.4.1"
   },
   "dependencies": {
     "@prisma/client": "6.3.0",
@@ -19,6 +23,8 @@
     "dotenv": "16.4.7",
     "express": "4.21.2",
     "express-async-errors": "3.1.1",
+    "express-jwt": "8.5.1",
+    "jsonwebtoken": "9.0.2",
     "prisma": "6.3.0",
     "zod": "3.24.1"
   },
@@ -30,9 +36,14 @@
     "dev": "tsx watch ./src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
-    "test": "vitest run",
+    "test:create-prisma-environment": "npm link ./prisma/vitest-environment-prisma",
+    "test:install-prisma-environment": "npm link vitest-environment-prisma",
+    "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
+    "test:e2e": "vitest run --dir ./src/controllers",
+    "test": "vitest run --dir ./src/use-cases",
     "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
   },
   "author": "",
   "license": "ISC"

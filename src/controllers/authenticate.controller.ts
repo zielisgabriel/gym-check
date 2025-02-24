@@ -1,8 +1,8 @@
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
-import { AuthenticateService } from "@/use-cases/authenticate-use-case";
-import { makeAuthenticateService } from "@/use-cases/factories/make-authenticate-service";
+import { makeAuthenticateUseCase } from "@/use-cases/factories/make-authenticate-use-case";
 import { Request, Response } from "express";
 import z from "zod";
+import { authConfig } from "./auth/auth.config";
+import { sign } from "jsonwebtoken";
 
 export class AuthenticateController{
     async create(req: Request, res: Response){
@@ -13,10 +13,17 @@ export class AuthenticateController{
 
         const { email, password } = bodySchema.parse(req.body)
 
-        const authenticateService = makeAuthenticateService()
+        const authenticateService = makeAuthenticateUseCase()
 
-        await authenticateService.execute({ email, password })
+        const { user } = await authenticateService.execute({ email, password })
 
-        res.status(200).json()
+        const { secret, expiresIn } = authConfig.jwt
+        const token = sign({}, secret, {
+            subject: user.id
+        } as {
+            subject: string
+        })
+
+        res.status(200).json({ token })
     }
 }

@@ -25,8 +25,6 @@ export class UserCreateServices{
             throw new UserAlreadyExistsError()
         }
         
-        // const prismaUsersRepository = new PrismaUsersRepository()
-        
         const user = await this.usersRepository.create({
             name,
             email,
@@ -34,7 +32,7 @@ export class UserCreateServices{
         })
 
         return {
-            user,
+            user
         }
     }
 }
