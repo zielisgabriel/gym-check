@@ -3,7 +3,7 @@
     "target": "ES2023",
     "lib": ["ES2023"],
     
-    "module": "node16",
+    "module": "Node16",
   
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

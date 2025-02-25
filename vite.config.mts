@@ -1,17 +1,24 @@
 import { defineConfig } from 'vitest/config'
-import tsConfigPaths from 'vite-tsconfig-paths'
+import tsconfigPaths from "vite-tsconfig-paths";
+import { join } from 'path';
 
 console.log('Vitest configuration being loaded...');
 
 export default defineConfig({
-    plugins: [tsConfigPaths()],
+    plugins: [tsconfigPaths()],
+    resolve: {
+      alias: {
+        '@/': join(__dirname, 'src/'),
+      }
+    },
     test: {
+      
       workspace: [
         {
           test: {
             include: ["./src/controllers/**/*.spec.ts"],
             name: 'prisma',
-            environment: "./prisma/vitest-environment-prisma/prisma-test-environments.ts",
+            environment: "./prisma/vitest-environment-prisma/prisma-test-environments.mts",
           }
         }
       ],

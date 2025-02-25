@@ -31,32 +31,9 @@ export default{
 
     return{
       async teardown(){
-        await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "5fb32807-1001-4ab6-9d21-4b1bf8bd9ed4" CASCADE;`)
         await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schema}" CASCADE;`)
         await prisma.$disconnect()
       }
     }
   }
 } as Environment
-
-
-
-
-
-// import { Environment } from "vitest/environments";
-
-// console.log('Custom environment loaded');
-
-// export default {
-//     name: 'prisma',
-//     transformMode: 'ssr',
-//     async setup() {
-//       console.error('Hello from setup');
-      
-//       return {
-//         async teardown() {
-//           console.error('Teardown from prisma environment');
-//         }
-//       };
-//     }
-//   } as Environment;
