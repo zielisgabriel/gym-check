@@ -23,11 +23,16 @@ export default{
   transformMode: 'ssr',
   async setup(){
     const schema = randomUUID()
-    const databaseURL = getDatabaseURL(schema)
+    
+    try {
+      const databaseURL = getDatabaseURL(schema)
 
-    process.env.DATABASE_URL = databaseURL
+      process.env.DATABASE_URL = databaseURL
 
-    execSync('npx prisma migrate deploy')
+      await execSync('npx prisma migrate deploy')
+    } catch (error) {
+      console.log(error)
+    }
 
     return{
       async teardown(){

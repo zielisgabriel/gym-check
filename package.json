@@ -14,8 +14,7 @@
     "tsx": "4.19.2",
     "typescript": "5.7.3",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.0.6",
-    "vitest-tsconfig-paths": "3.4.1"
+    "vitest": "3.0.6"
   },
   "dependencies": {
     "@prisma/client": "6.3.0",
@@ -39,6 +38,7 @@
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
     "test:e2e": "vitest run --dir ./src/controllers",
+    "test:e2e:watch": "vitest watch run --dir ./src/controllers",
     "test": "vitest run --dir ./src/use-cases",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",

@@ -1,18 +1,11 @@
 import { defineConfig } from 'vitest/config'
 import tsconfigPaths from "vite-tsconfig-paths";
-import { join } from 'path';
 
 console.log('Vitest configuration being loaded...');
 
 export default defineConfig({
     plugins: [tsconfigPaths()],
-    resolve: {
-      alias: {
-        '@/': join(__dirname, 'src/'),
-      }
-    },
     test: {
-      
       workspace: [
         {
           test: {
@@ -25,9 +18,3 @@ export default defineConfig({
       dir: 'src',
     }
 })
-
-/*
-environmentMatchGlobs: [
-  ["./prisma/vitest-environment-prisma", "./src/controllers/**"],
-],
-*/
