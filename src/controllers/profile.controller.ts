@@ -1,7 +1,9 @@
 import { Request, Response } from 'express'
-import { JwtPayload, verify } from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { authConfig } from './auth/auth.config'
 import { makeGetUserProfileUseCase } from '@/use-cases/factories/make-get-user-profile-use-case'
+
+const { verify } = jwt
 
 export class Profile{
     async show(req: Request, res: Response){

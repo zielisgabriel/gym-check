@@ -16,7 +16,7 @@
       ]
     },
     "types": [
-      "vitest/jsdom"
+      "vitest/globals"
     ]
   }
 }

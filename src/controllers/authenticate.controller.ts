@@ -2,7 +2,9 @@ import { makeAuthenticateUseCase } from "@/use-cases/factories/make-authenticate
 import { Request, Response } from "express";
 import z from "zod";
 import { authConfig } from "./auth/auth.config";
-import { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+
+const {sign} = jwt
 
 export class AuthenticateController{
     async create(req: Request, res: Response){

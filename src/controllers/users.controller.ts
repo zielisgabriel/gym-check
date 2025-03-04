@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import z from "zod";
-import { UserCreateServices } from "@/use-cases/users-create-use-case";
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
 import { makeRegisterUseCase } from "@/use-cases/factories/make-user-create-use-case";
 
 export class UsersController{

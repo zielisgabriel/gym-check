@@ -7,7 +7,7 @@ describe("Create User Controller", () => {
         const response = await request(app).post('/users').send({
             name: "Test",
             email: "test@emai.com",
-            passwordHash: "test123",
+            password: "test123",
         })
 
         expect(response.statusCode).toEqual(201)
