@@ -1,22 +1,22 @@
 {
   "compilerOptions": {
     "target": "ES2023",
-    "lib": ["ES2023"],
-    
-    "module": "Node16",
-  
+    "lib": [
+      "ES2023"
+    ],
+    "module": "CommonJS",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-
     "strict": true,
-
     "skipLibCheck": true,
-
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
-
-    "types": ["vitest/jsdom"]
+    "types": [
+      "vitest/jsdom"
+    ]
   }
 }
