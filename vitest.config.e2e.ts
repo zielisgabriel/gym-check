@@ -8,7 +8,6 @@ export default defineConfig({
     module: { type: "es6" },
   })],
   test: {
-    include: ["**/*.e2e-spec.ts"],
     globals: true,
     dir: "src",
     workspace: [

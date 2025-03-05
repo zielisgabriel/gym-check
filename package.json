@@ -41,7 +41,7 @@
     "build": "tsup src --out-dir build",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts --dir ./src/controllers",
     "test:e2e:watch": "vitest watch --config ./vitest.config.e2e.ts run --dir ./src/controllers",
-    "test": "vitest run --dir ./src/use-cases",
+    "test": "vitest run --config ./vite.config.ts --dir ./src/use-cases",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage"
