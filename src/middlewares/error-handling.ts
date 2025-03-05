@@ -6,7 +6,7 @@ import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-
 
 export function errorHandling(error: any, req: Request, res: Response, _: NextFunction){
     if(error instanceof Error){
-        res.status(500).json({ message: JSON.parse(error.message) })
+        res.status(500).json({ message: error.message })
     }
 
     if(error instanceof ZodError){

@@ -3,7 +3,6 @@ import 'express-async-errors'
 import { routes } from './routes'
 import { errorHandling } from './middlewares/error-handling'
 import { expressjwt } from "express-jwt"
-import { ENV } from './env'
 import { authConfig } from './controllers/auth/auth.config'
 
 const app = express()
