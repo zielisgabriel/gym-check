@@ -37,8 +37,8 @@
   "description": "Gym Check style app",
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
-    "start": "node build/server.js",
-    "build": "tsup src --out-dir build",
+    "prestart": "tsup src --out-dir build",
+    "start": "node ./build/server.cjs",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts --dir ./src/controllers",
     "test:e2e:watch": "vitest watch --config ./vitest.config.e2e.ts run --dir ./src/controllers",
     "test": "vitest run --config ./vite.config.ts --dir ./src/use-cases",

@@ -10,5 +10,8 @@ describe("Authenticate Controller", () => {
         const response = await request(app).post("/sessions").send(authenticateUserParams)
 
         expect(response.statusCode).toBe(200)
+        expect(response.body).toEqual({
+            token: expect.any(String),
+        })
     })
 })
