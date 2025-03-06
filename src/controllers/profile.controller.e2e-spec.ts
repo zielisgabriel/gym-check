@@ -16,5 +16,6 @@ describe("Profile Controller", () => {
             .send(authenticateUserParams)
 
         expect(profile.status).toBe(200)
+        expect(profile.body.user.id).toEqual(expect.any(String))
     })
 })
