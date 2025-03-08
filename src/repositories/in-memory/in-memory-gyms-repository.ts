@@ -1,5 +1,5 @@
 import { Gym, Prisma } from "@prisma/client";
-import { FindManyNearbyParams, GymsRepository } from "../gyms-repository";
+import { FindManyNearbyParams, GymsRepository, SearchGymParams } from "../gyms-repository";
 import { ResourceNotExistsError } from "@/use-cases/errors/resource-not-exists-error";
 import { randomUUID } from "crypto";
 import { getDistaceBetweenCoordinates } from "@/utils/get-distace-between-coordinates";
@@ -18,14 +18,13 @@ export class InMemoryGymsRepository implements GymsRepository{
         return gym
     }
 
-    async searchGym(query: string, page: number): Promise<Gym[]> {
+    async searchGym({ query, page }: SearchGymParams): Promise<Gym[]> {
         const gymSearched = this.database.filter(
             (item) => item
             .title
             .toLowerCase()
             .includes(
-                query
-                .toLowerCase()
+                query.toLowerCase()
             )
         )
 

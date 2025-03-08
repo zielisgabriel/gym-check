@@ -54,4 +54,10 @@ export class InMemoryCheckInsRepository implements CheckInsRepository{
 
         return checkIn
     }
+
+    async validate(checkInId: string): Promise<CheckIn> {
+        const checkInIndex = this.database.findIndex((value) => value.id === checkInId)
+        this.database[checkInIndex].validatedAt = new Date()
+        return this.database[checkInIndex]
+    }
 }

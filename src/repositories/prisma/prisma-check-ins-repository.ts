@@ -64,4 +64,17 @@ export class PrismaCheckInsRepository implements CheckInsRepository{
 
         return findCheckinOnSameDate
     }
+
+    async validate(checkInId: string): Promise<CheckIn> {
+        const checkIn = await prisma.checkIn.update({
+            data: {
+                validatedAt: new Date(),
+            },
+            where: {
+                id: checkInId
+            }
+        })
+
+        return checkIn
+    }
 }
