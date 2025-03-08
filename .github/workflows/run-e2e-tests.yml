@@ -1,0 +1,32 @@
+name: Run E2E Tests
+
+on: [pull_request]
+
+jobs:
+  run-e2e-tests:
+    name: Run E2E Tests
+    run-on: ubuntu-latest
+    services:
+      postgresql:
+        image: bitnami/postgresql:latest
+        container_name: gymcheck-pg
+        environment:
+          - POSTGRES_USER=docker
+          - POSTGRES_PASSWORD=docker
+          - POSTGRES_DB=gymcheck-pg
+        ports:
+          - "5432:5432"
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 23
+        cache: "npm"
+    - run: npm ci
+    - run: npm run test:e2e
+      env:
+        PORT: 3333
+        HOST: "0.0.0.0"
+        NODE_ENV: "prod"
+        DATABASE_URL: "postgresql://docker:docker@localhost:5432/gymcheck-pg?schema=public"
+        AUTH_SECRET: "agdajblkajoajspoiiejpoqijpgomslpnajapsdjg"
