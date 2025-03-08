@@ -70,6 +70,14 @@ JWT_SECRET="sua_chave_secreta_aqui"
         - Mostrar histórico de check-ins feitos pelo usuário
     - **[GET] /check-ins/:checkInId/validate**
         - Validar check-in do usuário (Somente Admins)
+
+### Exemplo de Fluxo de Check-in
+```mermaid
+graph TD;
+  User-->Check-In;
+  Check-In-->|Valida em até 20 min|Admin;
+  Admin-->Banco;
+```
     
 ## 🤝 Como Contribuir
 1. **Faça um fork do projeto**
