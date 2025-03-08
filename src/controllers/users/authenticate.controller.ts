@@ -19,13 +19,26 @@ export class AuthenticateController{
 
         const { user } = await authenticateService.execute({ email, password })
 
-        const { secret, expiresIn } = authConfig.jwt
-        const token = sign({}, secret, {
-            subject: user.id
-        } as {
-            subject: string
+        const { secret } = authConfig.jwt
+        const token = sign({
+            role: user.role,
+        }, secret, {
+            subject: user.id,
+            expiresIn: "10m"
         })
 
-        res.status(200).json({ token })
+        const refreshToken = sign({
+            role: user.role,
+        }, secret, {
+            subject: user.id,
+            expiresIn: "7d"
+        })
+
+        res.status(200).cookie("refreshToken", refreshToken, {
+            path: "/", // Pode ser acessado em qualquer caminho da aplicação
+            secure: true, // HTTPs
+            sameSite: true, // O Cookie só vai ser acessível dentro do mesmo domínio
+            httpOnly: true, // O Cookie só pode ser acessado pelo back-end
+        }).json({ token })
     }
 }

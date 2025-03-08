@@ -7,6 +7,7 @@ const { verify } = jwt
 
 export class Profile{
     async show(req: Request, res: Response){
+        console.log(req.auth.sub)
         const tokenAuth = req.headers.authorization
         
         if(!tokenAuth){
@@ -26,6 +27,7 @@ export class Profile{
         const { user } = await getUserProfile.execute({
             id: req.auth.sub,
         })
+
 
         res.status(200).json({
             user: {

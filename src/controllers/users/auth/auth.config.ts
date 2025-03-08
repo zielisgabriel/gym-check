@@ -10,6 +10,6 @@ interface AuthConfig{
 export const authConfig: AuthConfig = {
     jwt: {
         secret: ENV.AUTH_SECRET,
-        expiresIn: "14d",
+        expiresIn: "10m",
     }
 }
